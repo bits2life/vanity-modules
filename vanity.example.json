@@ -1,5 +1,5 @@
 {
-  "host": "bits2life.com",
+  "host": "go.bits2life.com",
   "repo": "https://github.com/bits2life/{name}",
   "redirect": "{repo}",
   "index": "https://github.com/bits2life",

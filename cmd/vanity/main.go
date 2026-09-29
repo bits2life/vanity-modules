@@ -1,7 +1,7 @@
 // Command vanity is a standalone server for Go vanity import paths.
 //
 // It is configured through the environment; see the package documentation of
-// bits2life.com/vanity-modules for the variables. The listen address is taken
+// go.bits2life.com/vanity-modules for the variables. The listen address is taken
 // from VANITY_ADDR, then PORT, and defaults to :8080.
 package main
 
@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"os"
 
-	vanity "bits2life.com/vanity-modules"
+	vanity "go.bits2life.com/vanity-modules"
 )
 
 func main() {

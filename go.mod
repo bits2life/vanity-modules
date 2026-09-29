@@ -1,3 +1,3 @@
-module bits2life.com/vanity-modules
+module go.bits2life.com/vanity-modules
 
 go 1.22
