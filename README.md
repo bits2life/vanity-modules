@@ -1,25 +1,25 @@
 # vanity-modules
 
-`bits2life.com/vanity-modules` serves Go vanity import paths. It lets
-`go get bits2life.com/foo` fetch a module that lives at
+`go.bits2life.com/vanity-modules` serves Go vanity import paths. It lets
+`go get go.bits2life.com/foo` fetch a module that lives at
 `github.com/bits2life/foo`, and sends people who open the same URL in a
 browser to the repository (or to its documentation).
 
 Standard library only.
 
 ```sh
-go get bits2life.com/vanity-modules
+go get go.bits2life.com/vanity-modules
 ```
 
 ## How it works
 
-When the go command resolves `bits2life.com/foo/bar` it requests
-`https://bits2life.com/foo/bar?go-get=1` and looks for a `go-import` meta tag.
+When the go command resolves `go.bits2life.com/foo/bar` it requests
+`https://go.bits2life.com/foo/bar?go-get=1` and looks for a `go-import` meta tag.
 This package answers with:
 
 ```html
-<meta name="go-import" content="bits2life.com/foo git https://github.com/bits2life/foo">
-<meta name="go-source" content="bits2life.com/foo https://github.com/bits2life/foo ...">
+<meta name="go-import" content="go.bits2life.com/foo git https://github.com/bits2life/foo">
+<meta name="go-source" content="go.bits2life.com/foo https://github.com/bits2life/foo ...">
 ```
 
 Subpackage paths resolve to the module root. A `go-source` tag is added for
@@ -31,7 +31,7 @@ GitHub and GitLab repositories.
 
 ```go
 h, err := vanity.New(vanity.Config{
-	Host: "bits2life.com",
+	Host: "go.bits2life.com",
 	Repo: "https://github.com/bits2life/{name}",
 })
 if err != nil {
@@ -61,7 +61,7 @@ cfg, err := vanity.FromEnv()
 | Variable          | Field      | Example                                 |
 |-------------------|------------|-----------------------------------------|
 | `VANITY_CONFIG`   | JSON file  | `/etc/vanity.json`                      |
-| `VANITY_HOST`     | `Host`     | `bits2life.com`                         |
+| `VANITY_HOST`     | `Host`     | `go.bits2life.com`                      |
 | `VANITY_REPO`     | `Repo`     | `https://github.com/bits2life/{name}`   |
 | `VANITY_VCS`      | `VCS`      | `git` (default)                         |
 | `VANITY_REDIRECT` | `Redirect` | `https://pkg.go.dev/{import}`           |
@@ -78,7 +78,7 @@ the pattern, and the longest matching path wins. See
 
 ```json
 {
-  "host": "bits2life.com",
+  "host": "go.bits2life.com",
   "repo": "https://github.com/bits2life/{name}",
   "index": "https://github.com/bits2life",
   "modules": [
@@ -97,18 +97,18 @@ Omit `repo` to serve only the listed modules.
 
 ### Placeholders
 
-| Placeholder | Meaning                          | Example                   |
-|-------------|----------------------------------|---------------------------|
-| `{name}`    | first path element after host    | `foo`                     |
-| `{module}`  | module path                      | `bits2life.com/foo`       |
-| `{import}`  | requested import path            | `bits2life.com/foo/bar`   |
-| `{repo}`    | resolved repository (redirects)  | `https://github.com/...`  |
+| Placeholder | Meaning                          | Example                    |
+|-------------|----------------------------------|----------------------------|
+| `{name}`    | first path element after host    | `foo`                      |
+| `{module}`  | module path                      | `go.bits2life.com/foo`     |
+| `{import}`  | requested import path            | `go.bits2life.com/foo/bar` |
+| `{repo}`    | resolved repository (redirects)  | `https://github.com/...`   |
 
 ## Standalone server
 
 ```sh
-go install bits2life.com/vanity-modules/cmd/vanity@latest
-VANITY_HOST=bits2life.com VANITY_REPO='https://github.com/bits2life/{name}' vanity
+go install go.bits2life.com/vanity-modules/cmd/vanity@latest
+VANITY_HOST=go.bits2life.com VANITY_REPO='https://github.com/bits2life/{name}' vanity
 ```
 
 It listens on `VANITY_ADDR`, else `:$PORT`, else `:8080`. Put it behind

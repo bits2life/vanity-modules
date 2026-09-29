@@ -1,8 +1,8 @@
 // Package vanity serves Go vanity import paths.
 //
-// A vanity import path such as bits2life.com/foo lets users "go get" a module
+// A vanity import path such as go.bits2life.com/foo lets users "go get" a module
 // that is hosted elsewhere, for example on GitHub. When the go command fetches
-// a vanity path it requests https://bits2life.com/foo?go-get=1 and expects an
+// a vanity path it requests https://go.bits2life.com/foo?go-get=1 and expects an
 // HTML page with a go-import meta tag that names the real repository. This
 // package answers those requests, and can redirect browsers visiting the same
 // URL to the repository or to its documentation.
@@ -11,7 +11,7 @@
 // repository with the same name.
 //
 //	h, err := vanity.New(vanity.Config{
-//		Host: "bits2life.com",
+//		Host: "go.bits2life.com",
 //		Repo: "https://github.com/bits2life/{name}",
 //	})
 //
@@ -33,11 +33,11 @@ import (
 // String fields that act as templates may use these placeholders:
 //
 //	{name}   the first path element after the host, e.g. "foo"
-//	{module} the full module path, e.g. "bits2life.com/foo"
-//	{import} the full import path requested, e.g. "bits2life.com/foo/bar"
+//	{module} the full module path, e.g. "go.bits2life.com/foo"
+//	{import} the full import path requested, e.g. "go.bits2life.com/foo/bar"
 //	{repo}   the resolved repository URL (Redirect only)
 type Config struct {
-	// Host is the vanity host, e.g. "bits2life.com". If empty, the Host
+	// Host is the vanity host, e.g. "go.bits2life.com". If empty, the Host
 	// header of each request is used.
 	Host string `json:"host,omitempty"`
 
@@ -67,7 +67,7 @@ type Config struct {
 // Module maps one vanity module path to a repository.
 type Module struct {
 	// Path is the module path below the host, e.g. "tools/lint" for
-	// bits2life.com/tools/lint. A leading host is accepted and removed.
+	// go.bits2life.com/tools/lint. A leading host is accepted and removed.
 	Path string `json:"path"`
 
 	// Repo is the repository URL, e.g. "https://github.com/bits2life/lint".
@@ -87,7 +87,7 @@ type Module struct {
 
 // match is the result of resolving an import path.
 type match struct {
-	module   string // full module path, e.g. "bits2life.com/foo"
+	module   string // full module path, e.g. "go.bits2life.com/foo"
 	importP  string // full requested import path
 	name     string // first path element
 	vcs      string
