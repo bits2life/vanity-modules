@@ -1,0 +1,11 @@
+{
+  "host": "bits2life.com",
+  "repo": "https://github.com/bits2life/{name}",
+  "redirect": "{repo}",
+  "index": "https://github.com/bits2life",
+  "modules": [
+    {"path": "tools/lint", "repo": "https://github.com/bits2life/lint-tools"},
+    {"path": "mono/foo", "repo": "https://github.com/bits2life/mono", "subdir": "foo"},
+    {"path": "legacy", "repo": "https://gitlab.com/bits2life/legacy", "redirect": "https://pkg.go.dev/{import}"}
+  ]
+}
